@@ -1,1 +1,6 @@
-# weather-app
+## Setup
+
+### MacOS/Linux
+
+- `npm install`
+- `npm start`
