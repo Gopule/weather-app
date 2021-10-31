@@ -7,6 +7,7 @@ import {
   weatherArray,
 } from "./functions/functions";
 import Weather from "./components/Weather";
+import logo from "./logo.svg";
 
 const App = () => {
   const [weatherData, setWeatherData] = useState([]);
@@ -14,9 +15,7 @@ const App = () => {
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(async (position) => {
-      const { data } = await axios.get(
-        `https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
-      );
+      const { data } = await axios.get();
       setWeatherObjectAndWeatherArray(data.daily);
       setWeatherData(weatherArray);
       const formattedLocation = formatLocation(data.timezone);
@@ -24,13 +23,17 @@ const App = () => {
     });
   }, []);
 
-  console.log(weatherArray);
-
   return (
     <div className="wrapper">
-      <p className="location">{location}</p>
+      {!weatherArray.length ? (
+        <img src={logo} className="App-logo" alt="logo" />
+      ) : (
+        <>
+          <p className="location">{location}</p>
 
-      <Weather weatherData={weatherData} />
+          <Weather weatherData={weatherData} />
+        </>
+      )}
     </div>
   );
 };
