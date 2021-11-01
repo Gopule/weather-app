@@ -15,7 +15,9 @@ const App = () => {
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(async (position) => {
-      const { data } = await axios.get();
+      const { data } = await axios.get(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
+      );
       setWeatherObjectAndWeatherArray(data.daily);
       setWeatherData(weatherArray);
       const formattedLocation = formatLocation(data.timezone);
