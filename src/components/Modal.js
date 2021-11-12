@@ -4,7 +4,6 @@ const Modal = ({ showModal, setShowModal, modalData }) => {
   const showHideClasseName = showModal
     ? "overlay display-block"
     : "overlay display-none";
-  //humidity % / air pressue hPa / wind MPH
   return (
     <div className={showHideClasseName}>
       <div className="modal-main">
