@@ -7,11 +7,14 @@ import {
   weatherArray,
 } from "./functions/functions";
 import Weather from "./components/Weather";
+import Modal from "./components/Modal";
 import logo from "./logo.svg";
 
 const App = () => {
   const [weatherData, setWeatherData] = useState([]);
   const [location, setLocation] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [modalData, setModalData] = useState({});
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(async (position) => {
@@ -31,9 +34,19 @@ const App = () => {
         <img src={logo} className="App-logo" alt="logo" />
       ) : (
         <>
+          <Modal
+            showModal={showModal}
+            setShowModal={setShowModal}
+            modalData={modalData}
+          />
+
           <p className="location">{location}</p>
 
-          <Weather weatherData={weatherData} />
+          <Weather
+            weatherData={weatherData}
+            setShowModal={setShowModal}
+            setModalData={setModalData}
+          />
         </>
       )}
     </div>

@@ -24,6 +24,9 @@ export const setWeatherObjectAndWeatherArray = (arr) => {
     day.high = Math.round(dayWeatherData.temp.max);
     day.low = Math.round(dayWeatherData.temp.min);
     day.icon = dayWeatherData.weather[0].icon;
+    day.humidity = dayWeatherData.humidity;
+    day.airPressure = dayWeatherData.pressure;
+    day.windSpeed = dayWeatherData.wind_speed;
     weatherArray.push(day);
   }
 };
